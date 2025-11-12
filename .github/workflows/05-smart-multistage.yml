@@ -39,4 +39,4 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Run NUnit Tests
-        run: dotnet test Exercise_CICD_Pipeline.Tests/Exercise_CICD_Pipeline.Tests.csproj --configuration Release --no-build
+        run: dotnet test Exercise_CICD_Pipeline.Tests/Exercise_CICD_Pipeline.Tests.csproj --configuration Release
