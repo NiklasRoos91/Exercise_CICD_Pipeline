@@ -40,3 +40,17 @@ jobs:
 
       - name: Run NUnit Tests
         run: dotnet test Exercise_CICD_Pipeline.Tests/Exercise_CICD_Pipeline.Tests.csproj --configuration Release
+
+  deploy-dev:
+    name: Deploy to Dev
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Deploy to Dev Environment
+        run: |
+          echo "Deploying ${{ vars.SERVICE_NAME }} to Dev..."
+          # Exempel: kör deployment-script med secrets
+          ./deploy.sh dev ${{ vars.SERVICE_NAME }} ${{ secrets.DEV_API_KEY }}
