@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise_CICD_Pipeline.Tests", "Exercise_CICD_Pipeline.Tests\Exercise_CICD_Pipeline.Tests.csproj", "{BFF92314-C21D-46F2-B3EB-EAE1681A14A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise_CICD_Pipeline.Api", "Exercise_CICD_Pipeline.Api\Exercise_CICD_Pipeline.Api.csproj", "{C8512F3C-4EFF-4398-A221-3ED77C8CCD15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF92314-C21D-46F2-B3EB-EAE1681A14A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF92314-C21D-46F2-B3EB-EAE1681A14A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF92314-C21D-46F2-B3EB-EAE1681A14A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF92314-C21D-46F2-B3EB-EAE1681A14A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8512F3C-4EFF-4398-A221-3ED77C8CCD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8512F3C-4EFF-4398-A221-3ED77C8CCD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8512F3C-4EFF-4398-A221-3ED77C8CCD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8512F3C-4EFF-4398-A221-3ED77C8CCD15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {303FE92A-D227-4C7A-808A-116DC661EA96}
+	EndGlobalSection
+EndGlobal

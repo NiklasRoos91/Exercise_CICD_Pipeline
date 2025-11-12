@@ -1,0 +1,6 @@
+@Exercise_CICD_Pipeline.Api_HostAddress = http://localhost:5036
+
+GET {{Exercise_CICD_Pipeline.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
