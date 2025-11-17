@@ -24,6 +24,26 @@ jobs:
 
       - name: Build solution
         run: dotnet build --configuration Release
+
+              # -----------------------------------
+      # SUCCESS DISCORD NOTIFICATION
+      # -----------------------------------
+      - name: Notify Discord – SUCCESS
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"✅ Tests PASSED for branch *${{ github.ref_name }}*! 🎉\"}" \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+      # -----------------------------------
+      # FAILURE DISCORD NOTIFICATION
+      # -----------------------------------
+      - name: Notify Discord – FAILURE
+        if: failure()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"❌ Tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
+          ${{ secrets.DISCORD_WEBHOOK }}
         
   test:
     name: 🧪 Run NUnit Tests
