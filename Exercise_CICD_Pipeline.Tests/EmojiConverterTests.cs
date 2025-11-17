@@ -44,4 +44,5 @@ namespace Exercise_CICD_Pipeline.Tests
             Assert.AreEqual("❓", _converter.ToEmoji("foobar"));
         }
     }
+    
 }
