@@ -37,42 +37,22 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-
-      - name: Run all NUnit Tests
-        run: |
-          dotnet test Project1.Tests/Project1.Tests.csproj --configuration Release
-          dotnet test Project2.Tests/Project2.Tests.csproj --configuration Release
-        continue-on-error: true
-      - name: Run Project1 Tests
-        run: dotnet test Project1.Tests/Project1.Tests.csproj --configuration Release
-      
-      - name: Run Project2 Tests
-        run: dotnet test Project2.Tests/Project2.Tests.csproj --configuration Release
-      
-      - name: Notify Discord – SUCCESS
-        if: success()
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"✅ All tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
-          ${{ secrets.DISCORD_WEBHOOK }}
-      
-      - name: Notify Discord – FAILURE
-        if: failure()
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"❌ Some tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
-          ${{ secrets.DISCORD_WEBHOOK }}
-            - name: Notify Discord after all tests
-              run: |
-                if [ $? -eq 0 ]; then
-                  curl -X POST -H "Content-Type: application/json" \
-                  -d "{\"content\": \"✅ All tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
-                  ${{ secrets.DISCORD_WEBHOOK }}
-                else
-                  curl -X POST -H "Content-Type: application/json" \
-                  -d "{\"content\": \"❌ Some tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
-                  ${{ secrets.DISCORD_WEBHOOK }}
           
+      - name: Run NUnit Tests
+        run: dotnet test Exercise_CICD_Pipeline.Tests/Exercise_CICD_Pipeline.Tests.csproj --configuration Release
+
+      - name: Notify Discord
+        if: always()
+        run: |
+          if [ ${{ job.status }} == 'success' ]; then
+            curl -X POST -H "Content-Type: application/json" \
+            -d "{\"content\": \"✅ Tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
+            ${{ secrets.DISCORD_WEBHOOK }}
+          else
+            curl -X POST -H "Content-Type: application/json" \
+            -d "{\"content\": \"❌ Tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
+            ${{ secrets.DISCORD_WEBHOOK }}
+            
   deploy-dev:
     name: Deploy to Dev
     runs-on: ubuntu-latest
