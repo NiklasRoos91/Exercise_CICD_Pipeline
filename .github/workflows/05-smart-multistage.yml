@@ -52,6 +52,7 @@ jobs:
             curl -X POST -H "Content-Type: application/json" \
             -d "{\"content\": \"❌ Tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
             ${{ secrets.DISCORD_WEBHOOK }}
+            fi
             
   deploy-dev:
     name: Deploy to Dev
