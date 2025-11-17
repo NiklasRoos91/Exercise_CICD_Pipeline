@@ -43,17 +43,35 @@ jobs:
           dotnet test Project1.Tests/Project1.Tests.csproj --configuration Release
           dotnet test Project2.Tests/Project2.Tests.csproj --configuration Release
         continue-on-error: true
-
-      - name: Notify Discord after all tests
+      - name: Run Project1 Tests
+        run: dotnet test Project1.Tests/Project1.Tests.csproj --configuration Release
+      
+      - name: Run Project2 Tests
+        run: dotnet test Project2.Tests/Project2.Tests.csproj --configuration Release
+      
+      - name: Notify Discord – SUCCESS
+        if: success()
         run: |
-          if [ $? -eq 0 ]; then
-            curl -X POST -H "Content-Type: application/json" \
-            -d "{\"content\": \"✅ All tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
-            ${{ secrets.DISCORD_WEBHOOK }}
-          else
-            curl -X POST -H "Content-Type: application/json" \
-            -d "{\"content\": \"❌ Some tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
-            ${{ secrets.DISCORD_WEBHOOK }}
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"✅ All tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
+          ${{ secrets.DISCORD_WEBHOOK }}
+      
+      - name: Notify Discord – FAILURE
+        if: failure()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"❌ Some tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
+          ${{ secrets.DISCORD_WEBHOOK }}
+            - name: Notify Discord after all tests
+              run: |
+                if [ $? -eq 0 ]; then
+                  curl -X POST -H "Content-Type: application/json" \
+                  -d "{\"content\": \"✅ All tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
+                  ${{ secrets.DISCORD_WEBHOOK }}
+                else
+                  curl -X POST -H "Content-Type: application/json" \
+                  -d "{\"content\": \"❌ Some tests FAILED on branch *${{ github.ref_name }}*! Check logs! 🔍\"}" \
+                  ${{ secrets.DISCORD_WEBHOOK }}
           
   deploy-dev:
     name: Deploy to Dev
