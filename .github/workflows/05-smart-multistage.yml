@@ -44,7 +44,7 @@ jobs:
       - name: Notify Discord
         if: always()
         run: |
-          if [ ${{ job.status }} == 'success' ]; then
+          if [ "${{ job.status }}" = "success" ]; then
             curl -X POST -H "Content-Type: application/json" \
             -d "{\"content\": \"✅ Tests passed for branch *${{ github.ref_name }}*! 🎉\"}" \
             ${{ secrets.DISCORD_WEBHOOK }}
